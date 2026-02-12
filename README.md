@@ -20,7 +20,7 @@ package main
 
 import (
         "log"
-        "github.com/sarjsheff/hiklib"
+        "github.com/r41co/hiklib"
 )
 
 func main() {
@@ -31,7 +31,7 @@ func main() {
 and run it
 
 ```shell
-docker run --platform linux/amd64 -it --rm  -v $(pwd)/EN-HCNetSDKV6.1.9.48_build20230410_linux64:/hiksdk -v $(pwd):/app -w /app -e LD_LIBRARY_PATH="/hiksdk/lib" -e CGO_CXXFLAGS="-I/hiksdk/incEn/" -e CGO_LDFLAGS="-L/hiksdk/lib -lhcnetsdk" golang go get github.com/sarjsheff/hiklib
+docker run --platform linux/amd64 -it --rm  -v $(pwd)/EN-HCNetSDKV6.1.9.48_build20230410_linux64:/hiksdk -v $(pwd):/app -w /app -e LD_LIBRARY_PATH="/hiksdk/lib" -e CGO_CXXFLAGS="-I/hiksdk/incEn/" -e CGO_LDFLAGS="-L/hiksdk/lib -lhcnetsdk" golang go get github.com/r41co/hiklib
 docker run --platform linux/amd64 -it --rm  -v $(pwd)/EN-HCNetSDKV6.1.9.48_build20230410_linux64:/hiksdk -v $(pwd):/app -w /app -e LD_LIBRARY_PATH="/hiksdk/lib" -e CGO_CXXFLAGS="-I/hiksdk/incEn/" -e CGO_LDFLAGS="-L/hiksdk/lib -lhcnetsdk" golang go run .
 ```
 
@@ -48,7 +48,7 @@ package main
 import (
 	"log"
 
-	"github.com/sarjsheff/hiklib"
+	"github.com/r41co/hiklib"
 )
 
 func main() {

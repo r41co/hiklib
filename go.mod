@@ -1,3 +1,3 @@
-module github.com/sarjsheff/hiklib
+module github.com/r41co/hiklib
 
 go 1.16
