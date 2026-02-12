@@ -18,6 +18,22 @@ extern "C"
     int byDChanNum;  // low byte byIPChanNum, high byte byHighDChanNum
   } DevInfo;
 
+  typedef struct MotionSearch
+  {
+    int from_year;
+    int from_month;
+    int from_day;
+    int from_hour;
+    int from_min;
+    int from_sec;
+    int to_year;
+    int to_month;
+    int to_day;
+    int to_hour;
+    int to_min;
+    int to_sec;
+  } MotionSearch;
+
   typedef struct MotionVideo
   {
     char *filename;
@@ -65,6 +81,7 @@ extern "C"
   //int HListenAlarmV30(long lUserID, int alarmport,void (*AlarmCallback)(long lCommand, NET_DVR_ALARMER *pAlarmer, char *pAlarmInfo, unsigned int dwBufLen, void* pUserData));
   int HReboot(int user);
   int HListVideo(int lUserID, struct MotionVideos *videos, int chno);
+  int HListVideo(int lUserID, struct MotionVideos *videos, int chno, struct MotionSearch search);
   int HSaveFile(int userId, char *srcfile, char *destfile);
   int HFormatDisk(int userID,int disk);
 

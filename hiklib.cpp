@@ -212,13 +212,29 @@ int HReboot(int user)
   return 1;
 }
 
-int HListVideo(int lUserID, struct MotionVideos *videos,int chno)
+int HListVideo(int lUserID, struct MotionVideos *videos, int chno)
 {
-  printf("List video.\n");
-
   auto now = system_clock::now();
   time_t tt = system_clock::to_time_t(now);
   tm local_tm = *localtime(&tt);
+  MotionSearch search;
+  search.from_year = local_tm.tm_year + 1900;
+  search.from_month = local_tm.tm_mon + 1;
+  search.from_day = local_tm.tm_mday;
+  search.from_hour = 0
+  search.from_min = 0
+  search.from_sec = 0
+  search.to_year = local_tm.tm_year + 1900;
+  search.to_month = local_tm.tm_mon + 1;
+  search.to_day = local_tm.tm_mday;
+  search.to_hour = 23
+  search.to_min = 59
+  search.to_sec = 59
+  return HListVideo(lUserID, videos, chno, search);
+}
+
+int HListVideo(int lUserID, struct MotionVideos *videos, int chno, struct MotionSearch search)
+  printf("List video.\n");
 
   // printf("%d\n", local_tm.tm_year);
 
@@ -228,19 +244,19 @@ int HListVideo(int lUserID, struct MotionVideos *videos,int chno)
   // m_struFileCondV50.dwFileType = 0xff;
   m_struFileCondV50.dwFileType = 255;
 
-  m_struFileCondV50.struStartTime.wYear = local_tm.tm_year + 1900;
-  m_struFileCondV50.struStartTime.byMonth = local_tm.tm_mon + 1;
-  m_struFileCondV50.struStartTime.byDay = local_tm.tm_mday;
-  m_struFileCondV50.struStartTime.byHour = 0;
-  m_struFileCondV50.struStartTime.byMinute = 0;
-  m_struFileCondV50.struStartTime.bySecond = 0;
+  m_struFileCondV50.struStartTime.wYear = search.from_year;
+  m_struFileCondV50.struStartTime.byMonth = search.from_moth;
+  m_struFileCondV50.struStartTime.byDay = search.from_day;
+  m_struFileCondV50.struStartTime.byHour = search.from_hour;
+  m_struFileCondV50.struStartTime.byMinute = search.from_min;
+  m_struFileCondV50.struStartTime.bySecond = search.from_sec;
 
-  m_struFileCondV50.struStopTime.wYear = local_tm.tm_year + 1900;
-  m_struFileCondV50.struStopTime.byMonth = local_tm.tm_mon + 1;
-  m_struFileCondV50.struStopTime.byDay = local_tm.tm_mday;
-  m_struFileCondV50.struStopTime.byHour = 23;
-  m_struFileCondV50.struStopTime.byMinute = 59;
-  m_struFileCondV50.struStopTime.bySecond = 59;
+  m_struFileCondV50.struStopTime.wYear = search.to_year;
+  m_struFileCondV50.struStopTime.byMonth = search.to_month;
+  m_struFileCondV50.struStopTime.byDay = search.to_day;
+  m_struFileCondV50.struStopTime.byHour = search.to_hour;
+  m_struFileCondV50.struStopTime.byMinute = search.to_min;
+  m_struFileCondV50.struStopTime.bySecond = search.to_sec;
 
   int lFindHandle = NET_DVR_FindFile_V50(lUserID, &m_struFileCondV50);
 
