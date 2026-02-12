@@ -230,7 +230,7 @@ int HListVideo(int lUserID, struct MotionVideos *videos,int chno)
 
   m_struFileCondV50.struStartTime.wYear = local_tm.tm_year + 1900;
   m_struFileCondV50.struStartTime.byMonth = local_tm.tm_mon + 1;
-  m_struFileCondV50.struStartTime.byDay = 1;
+  m_struFileCondV50.struStartTime.byDay = local_tm.tm_mday;
   m_struFileCondV50.struStartTime.byHour = 0;
   m_struFileCondV50.struStartTime.byMinute = 0;
   m_struFileCondV50.struStartTime.bySecond = 0;
