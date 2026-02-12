@@ -212,29 +212,28 @@ int HReboot(int user)
   return 1;
 }
 
-int HListVideo(int lUserID, struct MotionVideos *videos, int chno)
-{
-  auto now = system_clock::now();
-  time_t tt = system_clock::to_time_t(now);
-  tm local_tm = *localtime(&tt);
-  MotionSearch search;
-  search.from_year = local_tm.tm_year + 1900;
-  search.from_month = local_tm.tm_mon + 1;
-  search.from_day = local_tm.tm_mday;
-  search.from_hour = 0
-  search.from_min = 0
-  search.from_sec = 0
-  search.to_year = local_tm.tm_year + 1900;
-  search.to_month = local_tm.tm_mon + 1;
-  search.to_day = local_tm.tm_mday;
-  search.to_hour = 23
-  search.to_min = 59
-  search.to_sec = 59
-  return HListVideo(lUserID, videos, chno, search);
-}
-
 int HListVideo(int lUserID, struct MotionVideos *videos, int chno, struct MotionSearch search)
+{
   printf("List video.\n");
+
+  if ((search.from_year == 0) && (search.to_year == 0))
+  {
+    auto now = system_clock::now();
+    time_t tt = system_clock::to_time_t(now);
+    tm local_tm = *localtime(&tt);
+    search.from_year = local_tm.tm_year + 1900;
+    search.from_month = local_tm.tm_mon + 1;
+    search.from_day = local_tm.tm_mday;
+    search.from_hour = 0;
+    search.from_min = 0;
+    search.from_sec = 0;
+    search.to_year = local_tm.tm_year + 1900;
+    search.to_month = local_tm.tm_mon + 1;
+    search.to_day = local_tm.tm_mday;
+    search.to_hour = 23;
+    search.to_min = 59;
+    search.to_sec = 59;
+  }
 
   // printf("%d\n", local_tm.tm_year);
 
@@ -245,7 +244,7 @@ int HListVideo(int lUserID, struct MotionVideos *videos, int chno, struct Motion
   m_struFileCondV50.dwFileType = 255;
 
   m_struFileCondV50.struStartTime.wYear = search.from_year;
-  m_struFileCondV50.struStartTime.byMonth = search.from_moth;
+  m_struFileCondV50.struStartTime.byMonth = search.from_month;
   m_struFileCondV50.struStartTime.byDay = search.from_day;
   m_struFileCondV50.struStartTime.byHour = search.from_hour;
   m_struFileCondV50.struStartTime.byMinute = search.from_min;

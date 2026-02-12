@@ -207,9 +207,13 @@ func HikReboot(user int) int {
 }
 
 // HListVideo - list video
-func HikListVideo(lUserID int, chno int) (int, MotionVideos) {
+func HikListVideo(lUserID int, chno int, t ...int) (int, MotionVideos) {
 	v := C.MotionVideos{}
-	ret := C.HListVideo(C.int(lUserID), &v, C.int(chno))
+	s := C.MotionSearch{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+	if len(t) == 12 {
+		s = C.MotionSearch{C.int(t[0]), C.int(t[1]), C.int(t[2]), C.int(t[3]), C.int(t[4]), C.int(t[5]), C.int(t[6]), C.int(t[7]), C.int(t[8]), C.int(t[9]), C.int(t[10]), C.int(t[11])}
+	}
+	ret := C.HListVideo(C.int(lUserID), &v, C.int(chno), s)
 	vv := MotionVideos{}
 	vv.Count = int(v.count)
 	for i := 0; i < int(v.count); i++ {

@@ -80,7 +80,6 @@ extern "C"
   int HListenAlarmV30(long lUserID,int alarmport,void (*AlarmCallback)(LONG lCommand, NET_DVR_ALARMER *pAlarmer, char *pAlarmInfo, DWORD dwBufLen, void* pUserData));
   //int HListenAlarmV30(long lUserID, int alarmport,void (*AlarmCallback)(long lCommand, NET_DVR_ALARMER *pAlarmer, char *pAlarmInfo, unsigned int dwBufLen, void* pUserData));
   int HReboot(int user);
-  int HListVideo(int lUserID, struct MotionVideos *videos, int chno);
   int HListVideo(int lUserID, struct MotionVideos *videos, int chno, struct MotionSearch search);
   int HSaveFile(int userId, char *srcfile, char *destfile);
   int HFormatDisk(int userID,int disk);
